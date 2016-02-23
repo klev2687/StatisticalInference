@@ -10,18 +10,8 @@ Synopsis
 This document investigates the exponential distribution in R and compares it with Central Limit Theorem. The distribution of averages of 40 exponentials will be evaluated. The distribution of averages looks far more Gaussian than the original exponential distribution.
 
 ```{r}
-expo <- rexp(1000, rate = 0.2)
-hist(expo)
-
-expo_mean <- mean(expo)
-expo_var <- var(expo)
-```
-Theoritical Mean of exponential distribution : `r round(expo_mean,2)`  
-Theoritical variance of distribution : `r round(expo_var,2)`  
-
-```{r}
 mns = NULL
-for (i in 1 : 1000) mns = c(mns, mean(rexp(40)))
+for (i in 1 : 1000) mns = c(mns, mean(rexp(40, rate = 0.2)))
 hist(mns)
 
 avg_mean <- mean(mns)
@@ -31,3 +21,5 @@ avg_var <- var(mns)
 Sample Mean of exponential distribution : `r round(expo_mean,2)`  
 Sample variance of distribution : `r round(expo_var,2)`  
 
+Theoritical Mean of exponential distribution : `r 1/0.2`  
+Theoritical variance of distribution : `r (1/0.2)^2`  
