@@ -10,6 +10,7 @@ Synopsis
 This document investigates the exponential distribution in R and compares it with Central Limit Theorem. The distribution of averages of 40 exponentials will be evaluated. The distribution of averages looks far more Gaussian than the original exponential distribution.
 
 Simulation
+----------
 The code below creates necessary data with 1000 simulations.  
 ```{r}
 mns = NULL
@@ -23,25 +24,29 @@ Plotting simulated data
 hist(mns)
 ```
 
-Comparing Sample Mean
+###Comparing Sample Mean
 ```{r}
 sam_mean <- mean(mns)
 th_mean <- 1/lamda
 ```
 Sample Mean of exponential distribution : `r sam_mean`  
-Theoritical Mean of exponential distribution : `r th_mean`  
+Theoretical Mean of exponential distribution : `r th_mean`  
+This implies that mean of distribution of sample means is very close to theoretical mean of exponential distribution with lamda = 0.2.  
 
-Comparing Variance
+###Comparing Variance
 ```{r}
 sam_var <- var(mns)
 th_var <- (1/lamda)^2/n
 ```
 Sample variance of distribution : `r sam_var`  
-Theoritical variance of distribution : `r th_var`  
+Theoretical variance of distribution : `r th_var`  
+This implies that variance of distribution of sample means is very close to theoretical variance of exponential distribution with lamda = 0.2.  
 
-Checking for normality
+###Checking for normality
+To check whether the distribution on sample means is normal we will plot the q-q graph.
 ```{r}
 qqnorm(mns)
-qqline(mns)
+qqline(mns, col="red")
 ```
 
+The theoretical quantiles match the sample quantiles closely. This proves that the distribution is approximately normal.
