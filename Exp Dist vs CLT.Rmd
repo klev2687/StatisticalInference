@@ -2,21 +2,32 @@
 title: "Investigate Exponential Dist. against Central Limit Theorem"
 author: "Klevin D."
 date: "February 22, 2016"
-output: pdf_document
+output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Synopsis
+--------
+This document investigates the exponential distribution in R and compares it with Central Limit Theorem. The distribution of averages of 40 exponentials will be evaluated. The distribution of averages looks far more Gaussian than the original exponential distribution.
 
 ```{r}
-summary(cars)
+expo <- rexp(1000, rate = 0.2)
+hist(expo)
+
+expo_mean <- mean(expo)
+expo_var <- var(expo)
 ```
+Theoritical Mean of exponential distribution : `r round(expo_mean,2)`  
+Theoritical variance of distribution : `r round(expo_var,2)`  
 
-You can also embed plots, for example:
+```{r}
+mns = NULL
+for (i in 1 : 1000) mns = c(mns, mean(rexp(40)))
+hist(mns)
 
-```{r, echo=FALSE}
-plot(cars)
+avg_mean <- mean(mns)
+avg_var <- var(mns)
+
 ```
+Sample Mean of exponential distribution : `r round(expo_mean,2)`  
+Sample variance of distribution : `r round(expo_var,2)`  
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
