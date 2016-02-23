@@ -18,8 +18,15 @@ avg_mean <- mean(mns)
 avg_var <- var(mns)
 
 ```
-Sample Mean of exponential distribution : `r round(expo_mean,2)`  
-Sample variance of distribution : `r round(expo_var,2)`  
-
+Sample Mean of exponential distribution : `r round(avg_mean,3)`  
 Theoritical Mean of exponential distribution : `r 1/0.2`  
-Theoritical variance of distribution : `r (1/0.2)^2`  
+
+Theoritical variance of distribution : `r (1/0.2)^2/40`  
+Sample variance of distribution : `r round(avg_var,3)`  
+
+Checking for normality
+```{r}
+qqnorm(mns)
+qqline(mns)
+```
+
