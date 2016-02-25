@@ -8,6 +8,51 @@ output: html_document
 Synopsis
 --------
 
+Load the ToothGrowth data and perform some basic exploratory data analyses
 ```{r}
+data("ToothGrowth")
+str(ToothGrowth)
+```
+
+Provide a basic summary of the data.
+```{r}
+summary(ToothGrowth)
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+library(ggplot2)
+ggplot(data = ToothGrowth, aes(x=dose, y=len)) + geom_boxplot(aes(fill=dose)) + facet_grid(.~supp)
 
 ```
+
+Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose.
+Compare tooth growth by supp
+Check for variance before t-test
+```{r}
+suppvar <- split(ToothGrowth$len, ToothGrowth$supp)
+sapply(suppvar, var)
+```
+Based on the variance values, we will consider unequal variances.
+
+Conducting t-test for influence of supp. 
+```{r}
+t.test(len~supp, data = ToothGrowth, paired=FALSE, var.equal=FALSE)
+```
+We observe p-value is greater than 0.05 and 95% confidence interval includes 0, thus we fail to reject null hypothesis that tooth growth is influenced by supp.
+
+Compare tooth growth by dose
+Check for variance before t-test
+```{r}
+dosevar <- split(ToothGrowth$len, ToothGrowth$dose)
+sapply(dosevar, var)
+```
+Based on the variance values, we will consider approximatey equal variances.
+
+Conducting t-test for influence of dose. 
+Dose 0.5 vs Dose 1
+```{r}
+with(data = ToothGrowth,
+     t.test(len[dose==0.5], len[dose==1], paired=FALSE, var.equal=TRUE))
+```
+The p-value is approx. 0 and confidence interval does not contain 0. 
+
+
