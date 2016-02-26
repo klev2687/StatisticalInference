@@ -7,8 +7,9 @@ output: html_document
 
 Synopsis
 --------
+This report analyses the effect of vitamin C on ToothGrowth using the ToothGrowth data in the R data sets package. The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, (orange juice or ascorbic acid (a form of vitamin C and coded as VC).
 
-Load the ToothGrowth data and perform some basic exploratory data analyses
+Load the ToothGrowth data
 ```{r}
 data("ToothGrowth")
 str(ToothGrowth)
@@ -17,15 +18,24 @@ str(ToothGrowth)
 Provide a basic summary of the data.
 ```{r}
 summary(ToothGrowth)
+```
+Converting dose to factor variable since its a catergorical data.
+```{r}
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+```
 
+##Exploratory Data Analysis
+```{r}
 library(ggplot2)
 ggplot(data = ToothGrowth, aes(x=dose, y=len)) + geom_boxplot(aes(fill=dose)) + facet_grid(.~supp)
 
 ```
 
-Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose.
-Compare tooth growth by supp
+Based on above plot, we can conclude that the dose has an effect on tooth growth. Supplement OJ seems to have more influence on toothgrowth compared to VC.
+
+
+##Inferential Analysis
+###Compare tooth growth by supp
 Check for variance before t-test
 ```{r}
 suppvar <- split(ToothGrowth$len, ToothGrowth$supp)
@@ -39,7 +49,7 @@ t.test(len~supp, data = ToothGrowth, paired=FALSE, var.equal=FALSE)
 ```
 We observe p-value is greater than 0.05 and 95% confidence interval includes 0, thus we fail to reject null hypothesis that tooth growth is influenced by supp.
 
-Compare tooth growth by dose
+###Compare tooth growth by dose
 Check for variance before t-test
 ```{r}
 dosevar <- split(ToothGrowth$len, ToothGrowth$dose)
@@ -52,6 +62,13 @@ Dose 0.5 vs Dose 1
 ```{r}
 with(data = ToothGrowth,
      t.test(len[dose==0.5], len[dose==1], paired=FALSE, var.equal=TRUE))
+```
+The p-value is approx. 0 and confidence interval does not contain 0. 
+
+Dose 1 vs Dose 2
+```{r}
+with(data = ToothGrowth,
+     t.test(len[dose==1], len[dose==2], paired=FALSE, var.equal=TRUE))
 ```
 The p-value is approx. 0 and confidence interval does not contain 0. 
 
