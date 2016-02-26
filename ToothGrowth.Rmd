@@ -71,4 +71,4 @@ with(data = ToothGrowth,
 ```
 The p-value is approx. 0 and confidence interval does not contain 0. 
 
-
+Results
