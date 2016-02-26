@@ -1,5 +1,5 @@
 ---
-title: "ToothGrowth"
+title: "Analysis of ToothGrowth dataset"
 author: "Klevin D."
 date: "February 23, 2016"
 output: html_document
@@ -56,19 +56,22 @@ sapply(dosevar, var)
 ```
 Based on the variance values, we will consider approximatey equal variances.
 
-Conducting t-test for influence of dose. 
+Conducting t-test for influence of dose.  
 Dose 0.5 vs Dose 1
 ```{r}
 with(data = ToothGrowth,
      t.test(len[dose==0.5], len[dose==1], paired=FALSE, var.equal=TRUE))
 ```
-The p-value is approx. 0 and confidence interval does not contain 0. 
+The p-value is approx. 0 and confidence interval does not contain 0. Thus, we can reject the null hypothesis and the change in dose has an influence on toothgrowth.  
 
 Dose 1 vs Dose 2
 ```{r}
 with(data = ToothGrowth,
      t.test(len[dose==1], len[dose==2], paired=FALSE, var.equal=TRUE))
 ```
-The p-value is approx. 0 and confidence interval does not contain 0. 
+The p-value is approx. 0 and confidence interval does not contain 0. Thus, we can reject the null hypothesis and the change in dose has an influence on toothgrowth.  
 
-Results
+#Results
+From exploratory analysis, we can conclude that increasing dose can lead to increase in tooth growth and type of supplement may have an effect.
+
+From inferential analysis, we can support our earlier conclusion that dose has an impact on toothgrowth whereas we dont have enough evidence to state that type of supplement has an impact on toothgrowth.
