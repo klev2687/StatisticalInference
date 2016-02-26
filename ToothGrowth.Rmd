@@ -62,7 +62,7 @@ Dose 0.5 vs Dose 1
 with(data = ToothGrowth,
      t.test(len[dose==0.5], len[dose==1], paired=FALSE, var.equal=TRUE))
 ```
-The p-value is approx. 0 and confidence interval does not contain 0. Thus, we conclude that dose of 1mg has higher influence in tooth growth compared to dose of 0.5mg.
+The p-value is approx. 0 and confidence interval does not contain 0. 
 
 Dose 1 vs Dose 2
 ```{r}
