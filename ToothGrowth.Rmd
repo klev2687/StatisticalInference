@@ -33,7 +33,6 @@ ggplot(data = ToothGrowth, aes(x=dose, y=len)) + geom_boxplot(aes(fill=dose)) + 
 
 Based on above plot, we can conclude that the dose has an effect on tooth growth. Supplement OJ seems to have more influence on toothgrowth compared to VC.
 
-
 ##Inferential Analysis
 ###Compare tooth growth by supp
 Check for variance before t-test
